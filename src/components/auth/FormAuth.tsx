@@ -58,8 +58,7 @@ export default function FormAuth() {
   const y = useMotionValue(0);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleMouseMove = (e: any) => {
+    const handleMouseMove = (e: MouseEvent) => {
       // Get the center of the viewport
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
