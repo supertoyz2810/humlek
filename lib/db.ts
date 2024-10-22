@@ -26,4 +26,5 @@ const connect = async () => {
         throw new Error("Error: ", error);
     }
 };
+
 export default connect;
