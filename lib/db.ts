@@ -18,9 +18,10 @@ const connect = async () => {
     try {
         mongoose.connect(MONGODB_URI!, {
             dbName: 'nextrestapi',
-            bufferCommands: true,
+            bufferCommands: true
         });
         console.log("connected");
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.log("Error: ", error);
         throw new Error("Error: ", error);
