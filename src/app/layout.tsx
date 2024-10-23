@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Head from "next/head";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,10 +27,48 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Example Project</title>
+        <meta name="description" content={""} />
+      </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900 text-slate-400 relative h-[200vh]`}
       >
-        {children}
+        <nav className="bg-slate-950 py-3 px-20 w-full h-[50px] fixed flex justify-between items-center z-[99]">
+          <div className="flex flex-row items-center justify-center gap-8">
+            <div className="text-3xl hover:cursor-pointer text-slate-200">
+              Humlek
+            </div>
+            <div className="text-1xl hover:cursor-pointer hover:text-slate-200 transition-all">
+              <Link href={"/"}>About</Link>
+            </div>
+            <div className="text-1xl hover:cursor-pointer hover:text-slate-200 transition-all">
+              <Link href={"/"}>Foods</Link>
+            </div>
+            <div className="text-1xl hover:cursor-pointer hover:text-slate-200 transition-all">
+              <Link href={"/"}>Posts</Link>
+            </div>
+            <div className="text-1xl hover:cursor-pointer hover:text-slate-200 transition-all">
+              <Link href={"/"}>Shops</Link>
+            </div>
+          </div>
+          <div className="flex flex-row">
+            <div>Profile</div>
+          </div>
+        </nav>
+
+        <div className="flex flex-col w-full items-center relative pt-[50px]">
+          <div className="py-4 px-10 w-full">{children}</div>
+          <footer className="flex justify-center">
+            <div>Copyright by Humlek Co.Inc</div>
+          </footer>
+        </div>
       </body>
     </html>
   );
