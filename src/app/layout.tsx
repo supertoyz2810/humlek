@@ -25,16 +25,16 @@ export default function RootLayout({
         <title>Example Project</title>
         <meta name="description" content={""} />
       </Head>
-      <body
-        className={`antialiased bg-slate-900 text-slate-400 relative`}
-      >
-        <div>
+      <body className={`antialiased bg-slate-900 text-slate-400`}>
+        <div className="flex flex-col min-h-screen">
           <NavbarMain />
-        </div>
-        <div className="flex flex-col w-full items-center relative">
-          <div className="py-4 w-full">{children}</div>
-          <footer className="flex justify-center">
-            <div>Copyright by Humlek Co.Inc</div>
+
+          <main className="flex-grow flex flex-col items-center px-10 w-full">
+            <div className="w-full">{children}</div>
+          </main>
+
+          <footer className="bg-slate-950 w-full py-4 flex justify-center">
+            <div className="text-slate-500">Copyright by Humlek Co. Inc</div>
           </footer>
         </div>
       </body>

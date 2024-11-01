@@ -11,9 +11,9 @@ import {
 import Image from "next/image";
 import { TbLogout } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
-import { MdPayments } from "react-icons/md";
 import { MdOutlineNoFood } from "react-icons/md";
 import { FaShop } from "react-icons/fa6";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function NavbarMain() {
   return (
@@ -24,10 +24,10 @@ export default function NavbarMain() {
         </div>
         <div className="hidden md:flex flex-row gap-12">
           <div className="text-base hover:cursor-pointer hover:text-slate-200 transition-all">
-            <Link href={"/food"}>Food</Link>
+            <Link href={"/foods"}>Foods</Link>
           </div>
           <div className="text-base hover:cursor-pointer hover:text-slate-200 transition-all">
-            <Link href={"/shop"}>Shop</Link>
+            <Link href={"/shops"}>Shops</Link>
           </div>
         </div>
       </div>
@@ -58,23 +58,29 @@ export default function NavbarMain() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-800" />
             <div className="flex flex-col gap-[4px]">
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <CgProfile />
-                </span>
-                <span>Profile</span>
+              <DropdownMenuItem>
+                <Link href={"/profile"} className="text-[15px] flex gap-3">
+                  <span className="text-2xl">
+                    <CgProfile />
+                  </span>
+                  <span>Profile</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <MdPayments />
-                </span>
-                <span>Payment Check</span>
+              <DropdownMenuItem>
+                <Link href={"/cart"} className="text-[15px] flex gap-3">
+                  <span className="text-2xl">
+                    <AiOutlineShoppingCart />
+                  </span>
+                  <span>Cart Check</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <TbLogout />
-                </span>
-                <span>Logout</span>
+              <DropdownMenuItem>
+                <div className="text-[15px] flex gap-3">
+                  <span className="text-2xl">
+                    <TbLogout />
+                  </span>
+                  <span>Logout</span>
+                </div>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator className="bg-slate-800 flex md:hidden" />
