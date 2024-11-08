@@ -25,7 +25,7 @@ import {
 
 export default function CardLeftItem() {
     return (
-      <Card className="w-[300px] shadow-md shadow-orange-400 hover:shadow-lg hover:shadow-orange-400 transition-all group">
+      <Card className="w-full shadow-md hover:shadow-lg hover:shadow-orange-400 transition-all group">
         <CardHeader>
           <div className="flex flex-row justify-between">
             <Badge className="w-1/3 bg-yellow-500 rounded-xl text-slate-900 group-hover:bg-yellow-200">

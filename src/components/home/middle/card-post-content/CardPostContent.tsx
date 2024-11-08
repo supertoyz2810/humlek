@@ -38,15 +38,19 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PostProps } from "@/types/post.types";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function CardPostContent(data: PostProps) {
+  const { data: session } = useSession();
+  const [toggleExpandPost, setToggleExpandPost] = useState<boolean>(false);
   const [toggleComments, setToggleComments] = useState<boolean>(false);
   const [toggleEditComment, setToggleEditComment] = useState<boolean>(false);
+
   return (
     <Card className="w-full mx-auto text-slate-50">
       <CardHeader className="flex flex-row gap-2 justify-start h-full mx-5 mt-3">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={session?.user.image} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className="flex flex-col items-start">
@@ -58,9 +62,22 @@ export default function CardPostContent(data: PostProps) {
         </div>
       </CardHeader>
       <CardContent className="p-0 m-0">
-        <div className="text-1xl text-slate-200 mt-3 mx-5">
-          {data.postDetail.content}
+        <div className="text-1xl text-slate-200 mt-3 mx-5 flex flex-col">
+          <span
+            className={`${
+              toggleExpandPost ? "" : "line-clamp-3"
+            } text-ellipsis`}
+          >
+            {data.postDetail.content}
+          </span>
+          <span
+            onClick={() => setToggleExpandPost((prev) => !prev)}
+            className="justify-end items-end flex font-bold hover:underline"
+          >
+            {toggleExpandPost ? "View less" : "View more"}
+          </span>
         </div>
+
         <div className="w-full h-full flex flex-col items-center justify-center my-5">
           <Dialog>
             <DialogTrigger
@@ -79,13 +96,19 @@ export default function CardPostContent(data: PostProps) {
                           <></>
                         ) : (
                           <>
-                            <div className="block right-0 w-1/2 h-full bg-black absolute opacity-60 group-hover:opacity-50 transition-all"></div>
-                            <div className="absolute right-14 top-[35%] transform -translate-x-1/2 flex items-center gap-4">
-                              <FaPlus className="text-slate-50 text-6xl" />
-                              <span className="text-5xl">
-                                {data.postDetail.contentImg.length - 2}
-                              </span>
-                            </div>
+                            {index === 1 && (
+                              <>
+                                <div className="block right-0 w-1/2 h-full bg-black absolute opacity-60 group-hover:opacity-50 transition-all"></div>
+                                <div className="absolute aspect-square justify-center text-center h-full w-1/2 right-0">
+                                  <div className="flex gap-4 justify-center items-center w-full h-full mx-auto">
+                                    <FaPlus className="text-slate-50 text-6xl" />
+                                    <span className="text-5xl">
+                                      {data.postDetail.contentImg.length - 2}
+                                    </span>
+                                  </div>
+                                </div>
+                              </>
+                            )}
                           </>
                         )}
                         <Image
@@ -142,7 +165,7 @@ export default function CardPostContent(data: PostProps) {
           </Dialog>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-row gap-2 p-0 m-0 mx-5 mb-5">
+      <CardFooter className="flex flex-row lg:gap-2 gap-1 lg:mx-5 mb-2 px-2">
         <Button className="group bg-slate-800 transition-all w-full text-1xl flex justify-center items-center hover:bg-green-900 hover:text-green-200 active:bg-green-600">
           <div className="group-hover:animate-bounce-zoom-icon group-active:scale-[3] group-active:animate-none transition-all">
             <BiLike className="scale-125" />

@@ -31,9 +31,11 @@ import { PostSchema } from "@/schemas/post.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { dataPost } from "@/constants/Mockdata.constants";
 import { PostProps } from "@/types/post.types";
+import { useSession } from "next-auth/react";
 
 export default function MiddleMainContent() {
-  const [timerOut, setTimerOut] = React.useState<number>(2);
+  const { data: session } = useSession();
+  const [timerOut, setTimerOut] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
   const form = useForm<z.infer<typeof PostSchema>>({
     resolver: zodResolver(PostSchema),
@@ -64,10 +66,8 @@ export default function MiddleMainContent() {
     return () => clearInterval(testLoadingTime);
   }, []);
 
-  console.log(timerOut);
-
   return (
-    <div className="flex flex-col w-full gap-12 mx-52">
+    <div className="flex flex-col w-[700px] gap-12">
       <div className="flex flex-col w-full mx-auto">
         <Dialog>
           <DialogTrigger asChild>
@@ -75,7 +75,7 @@ export default function MiddleMainContent() {
               <CardHeader className="flex flex-row gap-4 items-center">
                 <CardTitle>
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src={session?.user.image} />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </CardTitle>

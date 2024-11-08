@@ -96,3 +96,14 @@ body {
     background-color: #a06db8; /* Darker color on hover */
   }
 }
+
+.custom-navbar-bg {
+  background: linear-gradient(
+    to right,
+    rgb(1, 2, 5),
+    rgba(15, 23, 42, 0.9),
+    rgb(5, 9, 17),
+    rgba(15, 23, 42, 0.9),
+    rgb(1, 2, 5)
+  );
+}

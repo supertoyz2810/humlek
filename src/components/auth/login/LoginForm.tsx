@@ -1,3 +1,6 @@
+"use client";
+
+import { signIn } from "next-auth/react";
 import LoginSchema from "@/schemas";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,31 +34,31 @@ export default function LoginForm() {
     setMessage("");
     const validateFields = LoginSchema.safeParse(values);
     if (validateFields.success) {
-      // try {
-      //   const res = await signIn("credentials", {
-      //     redirect: false,
-      //     username: validateFields.data.username,
-      //     password: validateFields.data.password,
-      //   });
-      //   if (res?.error) {
-      //     setMessage("Username or password is incorrect!");
-      //     return;
-      //   }
-      //   if (res?.ok) {
-      //     toast({
-      //       title: "Login Successfully!",
-      //       description: "Proceed to next page...",
-      //       variant: "success",
-      //       duration: 1000,
-      //     });
-      //     router.push("/");
-      //     return;
-      //   } else {
-      //     setMessage("Failed to Login!");
-      //   }
-      // } catch (error: any) {
-      //   setMessage(error.message);
-      // }
+      try {
+        const res = await signIn("credentials", {
+          redirect: false,
+          username: validateFields.data.username,
+          password: validateFields.data.password,
+        });
+        if (res?.error) {
+          setMessage("Username or password is incorrect!");
+          return;
+        }
+        if (res?.ok) {
+          // toast({
+          //   title: "Login Successfully!",
+          //   description: "Proceed to next page...",
+          //   variant: "success",
+          //   duration: 1000,
+          // });
+          // router.push("/");
+          return;
+        } else {
+          setMessage("Failed to Login!");
+        }
+      } catch (error: any) {
+        setMessage(error.message);
+      }
     } else {
       setMessage("Invalid Fields!");
     }
@@ -148,7 +151,7 @@ export default function LoginForm() {
             </div>
             <div className="flex flex-row gap-6">
               <Button
-                onClick={() => {}}
+                onClick={() => signIn("google", { callbackUrl: "/" })}
                 className="w-full transition-all bg-white text-gray-700 border border-gray-300 shadow-sm"
               >
                 <FcGoogle className="text-2xl" />
@@ -156,15 +159,6 @@ export default function LoginForm() {
               <Button className="group transition-all w-full bg-white text-gray-700 border border-gray-300 shadow-sm">
                 <FaGithub className="group-hover:text-white text-2xl" />
               </Button>
-            </div>
-            <div className="flex justify-end">
-              <Link
-                className="text-sm font-medium text-slate-200 hover:text-slate-400 hover:underline hover:underline-offset-4"
-                href="/register"
-                prefetch={false}
-              >
-                Don&apos;t have an account?
-              </Link>
             </div>
           </div>
           <p className="mt-6 text-xs text-slate-200">
