@@ -2,7 +2,7 @@ import axios from "axios";
 
 /* use axios for client side request */
 export const api = axios.create({
-  baseURL: "/",
+  baseURL: process.env.NEXT_PUBLIC_API,
   withCredentials: true,
 });
 

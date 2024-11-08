@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authRoutes, DEFAULT_LOGIN_REDIRECT, protectedRoutes } from "./constants/routes";
+import {
+  authRoutes,
+  DEFAULT_LOGIN_REDIRECT,
+  protectedRoutes,
+} from "./constants/routes";
 import { authenticate } from "./lib/authenticator";
 
 export async function middleware(req: NextRequest) {
@@ -8,12 +12,16 @@ export async function middleware(req: NextRequest) {
   const token = await authenticate(req);
 
   // Check if the current route is a protected route
-  const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isProtectedRoute = protectedRoutes.includes(
+    nextUrl.pathname.split("/")[1] ? `/${nextUrl.pathname.split("/")[1]}` : "/"
+  );
+  const isAuthRoute = authRoutes.includes(
+    nextUrl.pathname.split("/")[1] ? `/${nextUrl.pathname.split("/")[1]}` : ""
+  );
 
   if (isAuthRoute) {
     if (token) {
-        return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return null;
   }

@@ -76,3 +76,34 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1d273a; /* Background color of the scrollbar track */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #341966; /* Color of the scrollbar handle */
+    border-radius: 4px; /* Rounded corners on the scrollbar handle */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a06db8; /* Darker color on hover */
+  }
+}
+
+.custom-navbar-bg {
+  background: linear-gradient(
+    to right,
+    rgb(1, 2, 5),
+    rgba(15, 23, 42, 0.9),
+    rgb(5, 9, 17),
+    rgba(15, 23, 42, 0.9),
+    rgb(1, 2, 5)
+  );
+}

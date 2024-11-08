@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -11,70 +13,121 @@ import {
 import Image from "next/image";
 import { TbLogout } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
-import { MdPayments } from "react-icons/md";
 import { MdOutlineNoFood } from "react-icons/md";
 import { FaShop } from "react-icons/fa6";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 
-export default function NavbarMain() {
+type NavbarMainProps = {
+  scrollDown: boolean;
+  scrollPosition: number;
+};
+
+export default function NavbarMain({
+  scrollDown,
+  scrollPosition,
+}: NavbarMainProps) {
+  const { data: session } = useSession();
+
   return (
-    <nav className="bg-slate-950 py-3 px-10 w-full h-[60px] flex justify-between items-center z-[99] gap-8 sm:gap-0">
-      <div className="flex flex-row items-center justify-center gap-12">
-        <div className="text-2xl hover:cursor-pointer text-slate-200">
-          <Link href={"/"}>Humleks</Link>
+    <nav
+      className={`bg-slate-950 py-3 px-10 w-full flex justify-between items-center z-[99] gap-8 sm:gap-0 transition-all ${
+        scrollPosition === 0 ? "fixed" : "fixed custom-navbar-bg"
+      } ${scrollDown ? "h-0 py-4 transition-all" : "fixed h-[60px]"}`}
+    >
+      <div
+        className={`text-2xl hover:cursor-pointer text-slate-200 w-full ${
+          scrollDown ? "hidden" : ""
+        }`}
+      >
+        <Link href={"/"}>Humleks</Link>
+      </div>
+      <div className="hidden md:flex flex-row gap-12 items-center justify-center w-full">
+        <div className={`${scrollDown ? "text-2xl text-slate-200" : "text-3xl"} hover:cursor-pointer hover:text-slate-100 transition-all`}>
+          <Link href={"/foods"}>
+            <IoFastFoodSharp />
+          </Link>
         </div>
-        <div className="hidden md:flex flex-row gap-12">
-          <div className="text-base hover:cursor-pointer hover:text-slate-200 transition-all">
-            <Link href={"/food"}>Food</Link>
-          </div>
-          <div className="text-base hover:cursor-pointer hover:text-slate-200 transition-all">
-            <Link href={"/shop"}>Shop</Link>
-          </div>
+        <div className={`${scrollDown ? "text-2xl text-slate-200" : "text-3xl"} hover:cursor-pointer hover:text-slate-100 transition-all`}>
+          <Link href={"/shops"}>
+            <HiOutlineShoppingBag />
+          </Link>
         </div>
       </div>
-      <div className="flex flex-row items-center border-2 border-zinc-800 rounded-full hover:border-slate-200 transition-all group">
-        <DropdownMenu>
-          <DropdownMenuTrigger className="flex flex-row items-center focus:outline-none">
-            <div className="px-4">
-              <span className="group-hover:text-slate-50">username</span>
-            </div>
-            <div>
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </div>
+      <div
+        className={`bg-slate-950 flex flex-row items-center justify-end transition-all h-12 group w-full ${
+          scrollDown ? "hidden" : ""
+        }`}
+      >
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger
+            className={`flex flex-row items-center focus:outline-none`}
+          >
+            <Avatar>
+              <AvatarImage src={session?.user.image} />
+              <AvatarFallback>
+                {session?.user.name
+                  .split("")
+                  .map((word: string) => word.charAt(0).toUpperCase())
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="top-2 relative rounded-lg p-2">
+          <DropdownMenuContent
+            className={`top-2 relative rounded-lg p-2 right-10 ${
+              scrollDown ? "hidden" : ""
+            }`}
+          >
             <Image
-              alt=""
-              src={"https://github.com/shadcn.png"}
+              alt={session?.user.name
+                .split("")
+                .map((word: string) => word.charAt(0).toUpperCase())
+                .join("")}
+              src={session?.user.image}
               width={80}
               height={80}
               className="ml-2 my-2 rounded-sm"
             />
-            <DropdownMenuLabel className="text-1xl">Username</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-1xl">
+              {session?.user.name}
+            </DropdownMenuLabel>
             <DropdownMenuLabel className="text-[12px]">
-              @username • Joined June 2024
+              @{session?.user.email.split("@")[0]} • Joined June 2024
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-800" />
             <div className="flex flex-col gap-[4px]">
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <CgProfile />
-                </span>
-                <span>Profile</span>
+              <DropdownMenuItem>
+                <Link
+                  href={"/profile/username"}
+                  className="text-[15px] flex gap-3"
+                >
+                  <span className="text-2xl">
+                    <CgProfile />
+                  </span>
+                  <span>Profile</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <MdPayments />
-                </span>
-                <span>Payment Check</span>
+              <DropdownMenuItem>
+                <Link href={"/cart"} className="text-[15px] flex gap-3">
+                  <span className="text-2xl">
+                    <AiOutlineShoppingCart />
+                  </span>
+                  <span>Cart Check</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-[15px] flex gap-3">
-                <span className="text-2xl">
-                  <TbLogout />
-                </span>
-                <span>Logout</span>
+              <DropdownMenuItem>
+                <div
+                  className="text-[15px] flex gap-3"
+                  onClick={() => signOut()}
+                >
+                  <span className="text-2xl">
+                    <TbLogout />
+                  </span>
+                  <span>Logout</span>
+                </div>
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator className="bg-slate-800 flex md:hidden" />
