@@ -4,13 +4,28 @@ import Link from "next/link";
 import ProductCardItem from "./product-card-item/ProductCardItem";
 
 type ProductCardMainProps = {
-  restaurantId: string;
+  cafeId: string;
 };
 
-export default function ProductCardMain({ restaurantId }: ProductCardMainProps) {
+export default function ProductCardMain({ cafeId }: ProductCardMainProps) {
   return (
-    <div className="grid grid-cols-5 gap-y-5 justify-items-center">
-      <Link href={`${Number(restaurantId)}/product/1`}>
+    <div className="grid gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-12 m-auto justify-items-center">
+      <Link href={`${Number(cafeId)}/product/1`}>
+        <ProductCardItem />
+      </Link>
+      <Link href={`${Number(cafeId)}/product/1`}>
+        <ProductCardItem />
+      </Link>
+      <Link href={`${Number(cafeId)}/product/1`}>
+        <ProductCardItem />
+      </Link>
+      <Link href={`${Number(cafeId)}/product/1`}>
+        <ProductCardItem />
+      </Link>
+      <Link href={`${Number(cafeId)}/product/1`}>
+        <ProductCardItem />
+      </Link>
+      <Link href={`${Number(cafeId)}/product/1`}>
         <ProductCardItem />
       </Link>
     </div>

@@ -35,7 +35,7 @@ import { GrSend } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa";
 import { BiLike, BiDislike } from "react-icons/bi";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { PostProps } from "@/types/post.types";
+import { PostProps } from "@/types/post/post.types";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
