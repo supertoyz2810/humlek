@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/carousel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CafeProps } from "@/types/cafe/cafe.types";
+import type { AutoplayType } from "embla-carousel-autoplay";
 
 type CafeDetailPageProps = {
   params: {
@@ -91,29 +92,30 @@ export default function CafeDetailPage({
                 Autoplay({
                   delay: 2000,
                   stopOnInteraction: false,
-                }),
+                }) as AutoplayType,
               ]}
             >
               <CarouselContent>
-                {cafeData?.cafeDetails.contentImg.map(
-                  (imgSrc, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                      <div
-                        key={index}
-                        className="group relative flex items-center w-full h-[100px] border-2 rounded border-slate-700 hover:cursor-pointer transition-all"
-                      >
-                        <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
-                        <Image
-                          className="rounded-sm object-cover bg-no-repeat w-full h-full"
-                          alt=""
-                          src={imgSrc}
-                          height={600}
-                          width={600}
-                        />
-                      </div>
-                    </CarouselItem>
-                  )
-                )}
+                {cafeData?.cafeDetails.contentImg.map((imgSrc, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="md:basis-1/2 lg:basis-1/3"
+                  >
+                    <div
+                      key={index}
+                      className="group relative flex items-center w-full h-[100px] border-2 rounded border-slate-700 hover:cursor-pointer transition-all"
+                    >
+                      <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
+                      <Image
+                        className="rounded-sm object-cover bg-no-repeat w-full h-full"
+                        alt=""
+                        src={imgSrc}
+                        height={600}
+                        width={600}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
               </CarouselContent>
             </Carousel>
           </div>
@@ -140,9 +142,7 @@ export default function CafeDetailPage({
               </div>
             </div>
             {/* Content */}
-            <p className="text-slate-200">
-              {cafeData?.cafeDetails.content}
-            </p>
+            <p className="text-slate-200">{cafeData?.cafeDetails.content}</p>
           </div>
           {/* User Interact */}
           <div className="flex flex-col lg:flex-row items-start lg:gap-0 gap-4 lg:items-center justify-between">
