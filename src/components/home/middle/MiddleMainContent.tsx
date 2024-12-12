@@ -30,7 +30,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PostSchema } from "@/schemas/post.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { dataPost } from "@/constants/Mockdata.constants";
-import { PostProps } from "@/types/post.types";
+import { PostProps } from "@/types/post/post.types";
 import { useSession } from "next-auth/react";
 
 export default function MiddleMainContent() {

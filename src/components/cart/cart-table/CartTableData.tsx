@@ -26,7 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { CartProps } from "@/types/cart.types";
+import { CartProps } from "@/types/shop/cart.types";
 import {
   Table,
   TableBody,
@@ -158,7 +158,7 @@ export const columns: ColumnDef<CartProps>[] = [
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View restaurant</DropdownMenuItem>
+            <DropdownMenuItem>View cafe</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

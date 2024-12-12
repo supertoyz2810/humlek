@@ -27,9 +27,9 @@ export async function middleware(req: NextRequest) {
   }
 
   // If the user is accessing a protected route and there is no token, redirect to login
-  if (isProtectedRoute && !token) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
+  // if (isProtectedRoute && !token) {
+  //   return NextResponse.redirect(new URL("/login", req.url));
+  // }
 
   // Allow the request to proceed if authenticated or if accessing a public route
   return NextResponse.next();

@@ -1,6 +1,6 @@
 import { api } from "@/config/api/axios.config"
 import { ApiEndpointList } from "@/constants/api-endpoint.constant"
-import { LoginWithGoogleInputType, LoginWithGoogleOutputType } from "@/types/auth.types";
+import { LoginWithGoogleInputType, LoginWithGoogleOutputType } from "@/types/auth/auth.types";
 
 const AuthServices = {
   loginWithGoogle: async (

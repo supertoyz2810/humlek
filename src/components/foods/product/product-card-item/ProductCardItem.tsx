@@ -22,16 +22,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 export default function ProductCardItem() {
   return (
-    <Card className="w-[300px]">
+    <Card className="w-[280px]">
       <CardHeader>
         <CardTitle className="py-1 text-slate-50 flex flex-row items-center gap-3">
-          <Avatar>
-            <AvatarImage src="https://cdn1.iconfinder.com/data/icons/coffee-shop-12/64/barista-Shop_Owner-Avatar-Man-Hipster-512.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
           <div className="flex flex-col gap-1">
-            <span className="text-2xl text-slate-50 font-normal overflow-hidden line-clamp-1">
-              Trà sữa Phúc Long (L)
+            <span className="text-xl text-slate-50 font-normal">
+              Trà sữa Phúc Long - Phúc Long - Phúc Long (L)
             </span>
             <span className="text-xl text-green-600 font-normal">50.000đ</span>
           </div>
@@ -56,49 +52,6 @@ export default function ProductCardItem() {
           />
         </div>
       </CardHeader>
-      <CardFooter className="flex items-center justify-between p-0 mx-3 mb-3">
-        <div className="flex gap-1">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button className="bg-slate-900 border border-slate-800 hover:bg-green-900">
-                  <PiArrowFatUpFill className="text-1xl text-green-600" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Upvote</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button className="bg-slate-900 hover:bg-red-900 border border-slate-800">
-                  <PiArrowFatDownFill className="text-1xl text-red-600" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Downvote</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <div className="flex justify-center gap-6">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button className="bg-slate-900 hover:bg-cyan-900 border border-slate-800">
-                  <FaComments className="text-lg text-cyan-600" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Comments</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-      </CardFooter>
     </Card>
   );
 }

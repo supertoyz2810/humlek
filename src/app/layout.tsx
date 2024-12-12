@@ -44,7 +44,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             {!authRoutes.includes(pathname) && <NavbarMain scrollDown={isScrollingDown} scrollPosition={scrollPosition}/>}
 
-            <main className="flex-grow flex flex-col items-center lg:px-10 w-full pt-14">
+            <main className="flex-grow flex flex-col items-center w-full">
               <div className="w-full">{children}</div>
             </main>
 
