@@ -82,7 +82,7 @@ export default function CafeDetailPage({ params }: CafeDetailPageProps) {
       >
         <div className="gap-4 flex">
           <div className="flex flex-row gap-3 w-full mx-auto justify-center">
-            <Carousel plugins={[autoplay]}>
+            <Carousel>
               <CarouselContent className="w-full m-0 gap-3">
                 {cafeData?.cafeDetails.contentImg.map((imgSrc, index) => (
                   <CarouselItem
