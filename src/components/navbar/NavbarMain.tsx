@@ -10,16 +10,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import Image from "next/image";
 import { TbLogout } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineNoFood } from "react-icons/md";
 import { FaShop } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { GoStarFill } from "react-icons/go";
 import { signOut, useSession } from "next-auth/react";
-import { IoFastFoodSharp } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { MdLocalCafe } from "react-icons/md";
 
 type NavbarMainProps = {
   scrollDown: boolean;
@@ -35,7 +41,7 @@ export default function NavbarMain({
   return (
     <nav
       className={`bg-slate-950 py-3 px-10 w-full flex justify-between items-center z-[99] gap-8 sm:gap-0 transition-all ${
-        scrollPosition === 0 ? "fixed" : "fixed custom-navbar-bg"
+        scrollPosition === 0 ? "relative" : "fixed custom-navbar-bg"
       } ${scrollDown ? "h-0 py-4 transition-all" : "fixed h-[60px]"}`}
     >
       <div
@@ -46,19 +52,27 @@ export default function NavbarMain({
         <Link href={"/"}>Humleks</Link>
       </div>
       <div className="hidden md:flex flex-row gap-12 items-center justify-center w-full">
-        <div className={`${scrollDown ? "text-2xl text-slate-200" : "text-3xl"} hover:cursor-pointer hover:text-slate-100 transition-all`}>
-          <Link href={"/foods"}>
-            <IoFastFoodSharp />
+        <div
+          className={`${
+            scrollDown ? "text-2xl text-slate-200" : "text-3xl"
+          } hover:cursor-pointer hover:text-slate-100 transition-all`}
+        >
+          <Link href={"/cafes"}>
+            <MdLocalCafe />
           </Link>
         </div>
-        <div className={`${scrollDown ? "text-2xl text-slate-200" : "text-3xl"} hover:cursor-pointer hover:text-slate-100 transition-all`}>
+        <div
+          className={`${
+            scrollDown ? "text-2xl text-slate-200" : "text-3xl"
+          } hover:cursor-pointer hover:text-slate-100 transition-all`}
+        >
           <Link href={"/shops"}>
             <HiOutlineShoppingBag />
           </Link>
         </div>
       </div>
       <div
-        className={`bg-slate-950 flex flex-row items-center justify-end transition-all h-12 group w-full ${
+        className={`flex flex-row items-center justify-end transition-all h-12 group w-full ${
           scrollDown ? "hidden" : ""
         }`}
       >
@@ -91,8 +105,18 @@ export default function NavbarMain({
               height={80}
               className="ml-2 my-2 rounded-sm"
             />
-            <DropdownMenuLabel className="text-1xl">
+            <DropdownMenuLabel className="text-1xl flex items-center gap-2">
               {session?.user.name}
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <GoStarFill className="text-red-500 animate-glow transition-all" />
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-slate-700">
+                    <p>Administrator</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </DropdownMenuLabel>
             <DropdownMenuLabel className="text-[12px]">
               @{session?.user.email.split("@")[0]} • Joined June 2024

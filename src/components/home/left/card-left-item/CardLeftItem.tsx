@@ -37,7 +37,7 @@ export default function CardLeftItem() {
           </div>
           <CardTitle className="py-1 text-slate-50 flex flex-row items-center gap-3">
             <Avatar>
-              <AvatarImage src="https://cdn1.iconfinder.com/data/icons/coffee-shop-12/64/barista-Shop_Owner-Avatar-Man-Hipster-512.png" />
+              <AvatarImage src="https://cdn1.iconfinder.com/data/icons/cafe-shop-12/64/barista-Shop_Owner-Avatar-Man-Hipster-512.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <span className="text-slate-50 text-[16px]">
