@@ -21,31 +21,33 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
-import { CafeLocationProps, CafeProps } from "@/types/cafe/cafe.types";
-import { formatNumber } from "@/utils/format-number.utils";
+import {
+  CafeLocationProps,
+  CafeOperation,
+  CafeProps,
+} from "@/types/cafe/cafe.types";
+import { formatLikeNumber } from "@/utils/format-number.utils";
+import { BiSolidLike } from "react-icons/bi";
 
-export default function CafeCardItem({
-  data,
-}: {
-  data: CafeProps;
-}) {
-  const [cafeLocation, setCafeLocation] =
-    useState<CafeLocationProps>();
+export default function CafeCardItem({ data }: { data: CafeProps }) {
+  const [cafeLocation, setCafeLocation] = useState<CafeLocationProps>();
+  const [cafeOperation, setCafeOperation] = useState<CafeOperation>();
 
   useEffect(() => {
-    setCafeLocation(data.cafeDetails.cafeLocation)
+    setCafeLocation(data.cafeDetails.cafeLocation);
+    setCafeOperation(data.cafeDetails.cafeOperation);
   }, [data.cafeDetails.cafeLocation]);
 
   return (
     <Card
-      className={`flex flex-col justify-between w-[300px] h-full group ${
+      className={`flex flex-col justify-between w-full h-full group ${
         data.isHoldingEvents
           ? "hover:shadow-red-500 shadow-[0_0px_12px_0px_rgba(0,0,0,0.1)] hover:border-red-600"
           : ""
       } ${data.isOnPromotion ? "hover:border-orange-500" : ""}`}
     >
-      <CardHeader className="flex flex-col h-full justify-between">
-        <div className="flex flex-row justify-between">
+      <CardHeader className="flex flex-col justify-between">
+        <div className="flex flex-row justify-between gap-1 items-center">
           <div className="flex flex-row w-full gap-1 items-center">
             {data.isTodayMenu && (
               <TooltipProvider>
@@ -94,34 +96,57 @@ export default function CafeCardItem({
             </Tooltip>
           </TooltipProvider>
         </div>
-        <CardTitle className="text-slate-50">
-          <span className="text-xl line-clamp-2">{data.cafeDetails.title}</span>
+        <CardTitle className="text-slate-50 flex justify-between">
+          <div className="text-xl line-clamp-1 text-ellipsis">
+            {data.cafeDetails.title}
+          </div>
+          <div className="flex flex-row gap-1 items-center">
+            <span className="text-md animate-glow transition-all">
+              <BiSolidLike className=" text-slate-200" />
+            </span>
+            <span className="text-green-500 text-md">
+              {Math.floor(
+                (data.totalLike / (data.totalLike + data.totalDislike)) * 100
+              )}
+              %
+            </span>
+          </div>
         </CardTitle>
-        <CardDescription className="text-slate-200 flex items-start h-full">
+        <CardDescription className="text-slate-200 flex items-start">
           <span className="text-wrap line-clamp-2 text-ellipsis">
             {data.cafeDetails.content}
           </span>
         </CardDescription>
-        <div className="text-[12px] text-wrap line-clamp-2 text-ellipsis h-full text-yellow-300">
-          <span>Đ/C: {cafeLocation?.street}</span>
-          {cafeLocation?.district && <span>, {cafeLocation?.district}</span>}
-          {cafeLocation?.ward && <span>, Phường {cafeLocation?.ward}</span>}
-          {cafeLocation?.city && <span>, {cafeLocation?.city}</span>}
+        <div className="space-y-1">
+          <div className="text-[12px] text-yellow-300 line-clamp-2">
+            <span>Đ/C:</span>
+            <span>{cafeLocation?.street}</span>
+            {cafeLocation?.district && <span>, {cafeLocation?.district}</span>}
+            {cafeLocation?.ward && <span>, Phường {cafeLocation?.ward}</span>}
+            {cafeLocation?.city && <span>, {cafeLocation?.city}</span>}
+          </div>
+          <div className="text-[12px] text-yellow-300 line-clamp-2">
+            Opening hour: {cafeOperation?.openingTime} -{" "}
+            {cafeOperation?.closingTime}
+          </div>
         </div>
-        <div className="flex flex-row gap-1 text-white">
+        <div className="flex flex-row gap-1 text-slate-50">
           <span>#</span>
-          {data.cafeDetails.cafeCategory.map((item) => (
-            <Badge
-              key={item.id}
-              className="w-auto bg-orange-800 rounded-xl text-slate-50 hover:bg-orange-600"
-            >
-              {item.cafeCategoryName}
-            </Badge>
-          ))}
+          {data.cafeDetails.cafeCategory.map((item, index) => {
+            if (index > 2) return <>.</>
+            return (
+              <Badge
+                key={item.id}
+                className="w-auto bg-orange-800 rounded-xl text-slate-50 hover:bg-orange-600"
+              >
+                {item.cafeCategoryName}
+              </Badge>
+            );
+          })}
         </div>
-        <div className="flex w-full h-full py-2">
+        <div className="flex w-full h-full">
           <Image
-            className="rounded-sm h-[200px]"
+            className="rounded-sm h-[260px] w-full object-cover bg-center bg-no-repeat"
             alt=""
             src={data.cafeDetails.thumbnail}
             height={600}
@@ -129,14 +154,14 @@ export default function CafeCardItem({
           />
         </div>
       </CardHeader>
-      <CardFooter className="flex items-center justify-between p-0 mx-3 mb-3">
+      <CardFooter className="flex items-center justify-between p-0 mx-3 mb-3 h-full">
         <div className="flex gap-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button className="bg-slate-900 border border-slate-800 hover:bg-green-900">
                   <PiArrowFatUpFill className="text-1xl text-green-600" />
-                  <span>{formatNumber(data.totalLike)}</span>
+                  <span>{formatLikeNumber(data.totalLike)}</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>

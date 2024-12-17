@@ -7,7 +7,7 @@ export default function CafeCard() {
   return (
     <>
       {dataCafe.map((data: CafeProps) => (
-        <Link key={data.id} href={`/foods/cafe/${data.id}`}>
+        <Link key={data.id} href={`/cafes/${data.id}`}>
           <CafeCardItem data={data} />
         </Link>
       ))}

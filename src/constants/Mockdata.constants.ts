@@ -189,8 +189,10 @@ export const dataCafe: CafeProps[] = [
     cafeDetails: {
       title: "Phuc Long Cafe & Tea",
       phoneNumber: "23456789",
+      cafeLogo:
+        "https://upload.wikimedia.org/wikipedia/vi/thumb/3/32/Logo_Ph%C3%BAc_Long.svg/516px-Logo_Ph%C3%BAc_Long.svg.png?20240331120545",
       thumbnail:
-        "https://scontent.fhan3-3.fna.fbcdn.net/v/t1.6435-9/35360074_1724945917575040_8593013048464113664_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=kwWN-0hWB_4Q7kNvgEMUlUg&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&_nc_gid=ADEQVk1yezB5ygKABF2nUy7&oh=00_AYAKpgvpLa354cxt93NDKjetSkTun773t8tNvlXfjlkMKw&oe=6770E95F",
+        "https://doanhnghiephoinhap.vn/stores/news_dataimages/doanhnghiephoinhapvn/122022/09/02/phuc-long-dang-la-ga-de-trung-vang-cua-masan-26-.8287.jpg",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       contentImg: [
@@ -199,6 +201,11 @@ export const dataCafe: CafeProps[] = [
         "https://scontent.fhan4-5.fna.fbcdn.net/v/t1.6435-9/35358682_1724945750908390_5266540433667784704_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=HIhZaP3_TSkQ7kNvgGIFix3&_nc_zt=23&_nc_ht=scontent.fhan4-5.fna&_nc_gid=AsWfGZqY7Y_cYCq7mBwmatI&oh=00_AYDutDEQU4njCPbgFO2Z9yNcwH10C_lWbMgWyPLsqqROkQ&oe=6770E5D6",
         "https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-9/35298487_1724945627575069_8546917007017115648_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=hJ2teQS17kYQ7kNvgFxKuCh&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&_nc_gid=Afy2q4o_8F8jUxsX8Zbk3Ff&oh=00_AYCH7n4MSLmGIfQ7Jaqyy9ytVfi5G1NKr6quk6Wr-98wLg&oe=6770E091",
       ],
+      cafeOperation: {
+        openingTime: "07:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.HOCHIMINH,
         street: "1B-1B1, Đường Cộng Hoà",
@@ -241,14 +248,20 @@ export const dataCafe: CafeProps[] = [
     cafeDetails: {
       title: "Katinat Saigon Kafe",
       phoneNumber: "23456789",
-      thumbnail:
-        "https://urbox.vn/_next/image?url=https%3A%2F%2Fupload.urbox.vn%2Fstrapi%2FGallery_Katinat_1_375aa9eded.jpg&w=1080&q=75",
+      thumbnail: "https://mkt.1cdn.vn/2023/06/29/katinat.jpeg",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       contentImg: [
         "https://scontent.fhan3-3.fna.fbcdn.net/v/t1.6435-9/35379526_1724945860908379_3062394875564523520_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=i8-4I9QEaaIQ7kNvgFmx5x4&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&_nc_gid=A6zvV2Uy-F95FCOTSE7e3Ra&oh=00_AYCAK2c8pDt8BjzUfGtCVv-3Rf8Q4a1q40MQaJI7L4-6Hw&oe=6770F5BF",
         "https://scontent.fhan4-5.fna.fbcdn.net/v/t1.6435-9/35285824_1724945834241715_3263744514359033856_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=UOf2Sp7JI3cQ7kNvgFstM3j&_nc_zt=23&_nc_ht=scontent.fhan4-5.fna&_nc_gid=Aeojyxc4lXC3jr3JVO-p12L&oh=00_AYBKw497VSI13hdjlOyyf5yaNiErjnat8g9FjU5DUyAVcA&oe=6770EB2C",
       ],
+      cafeLogo:
+        "https://cdn.haitrieu.com/wp-content/uploads/2022/06/logo-katinat-text.png",
+      cafeOperation: {
+        openingTime: "07:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.HOCHIMINH,
         street: "533, Đường Nguyễn Tri Phương",
@@ -305,6 +318,13 @@ export const dataCafe: CafeProps[] = [
         "https://file.hstatic.net/1000075078/file/hcm-to-ngoc-van4_8661e3426ba1471fbbd04042f4ce58af.jpg",
         "https://file.hstatic.net/1000075078/file/hcm-to-ngoc-van6_0b450ced0b0d4b4083fcbee86e8bc71a.jpg",
       ],
+      cafeLogo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Coffee_House_logo.svg/512px-The_Coffee_House_logo.svg.png",
+      cafeOperation: {
+        openingTime: "07:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.THUDUC,
         street: "116, Tô Ngọc Vân",
@@ -324,6 +344,22 @@ export const dataCafe: CafeProps[] = [
           id: "3",
           cafeCategoryName: "cozy",
         },
+        {
+          id: "4",
+          cafeCategoryName: "Overnight",
+        },
+        {
+          id: "5",
+          cafeCategoryName: "Rooftop",
+        },
+        {
+          id: "6",
+          cafeCategoryName: "cozy",
+        },
+        {
+          id: "7",
+          cafeCategoryName: "cozy",
+        },
       ],
       cafeTheme: {
         primaryColor: "#d5b026",
@@ -337,7 +373,7 @@ export const dataCafe: CafeProps[] = [
       },
     ],
     totalLike: 999,
-    totalDislike: 2,
+    totalDislike: 315,
     totalComment: 10,
     totalShare: 5,
     isTodayMenu: false,
@@ -352,14 +388,21 @@ export const dataCafe: CafeProps[] = [
       title: "Highlands Cafe Nguyễn Trãi",
       phoneNumber: "23456789",
       thumbnail:
-        "https://lh3.googleusercontent.com/p/AF1QipNgC95WEzWk2-Fh1AQdDx6KveewgQbMtRDFQJKo=s680-w680-h510",
+        "https://phucthanhan.com.vn/wp-content/uploads/2024/02/highland-scaled.jpg",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      cafeLogo:
+        "https://download.logo.wine/logo/Highlands_Coffee/Highlands_Coffee-Logo.wine.png",
       contentImg: [
         "https://lh3.googleusercontent.com/p/AF1QipPTZ5G91BKLNSK9H9xPDqcOGax-IP6LdfKtAdk_=s680-w680-h510",
         "https://lh3.googleusercontent.com/p/AF1QipMuXB2TNdDSwwu2HOztWbIaveBX9hOY2BrCUEw_=s680-w680-h510",
         "https://lh3.googleusercontent.com/p/AF1QipMFjFZxp4Po-LCfsLIl9VcTjq0vtsedey4fz_4=s680-w680-h510",
       ],
+      cafeOperation: {
+        openingTime: "07:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.HOCHIMINH,
         street: "210, Đ. Nguyễn Trãi",
@@ -392,7 +435,7 @@ export const dataCafe: CafeProps[] = [
       },
     ],
     totalLike: 7463235,
-    totalDislike: 2,
+    totalDislike: 1062132,
     totalComment: 10,
     totalShare: 5,
     isTodayMenu: false,
@@ -407,7 +450,7 @@ export const dataCafe: CafeProps[] = [
       title: "Trung Nguyên Legend Café",
       phoneNumber: "23456789",
       thumbnail:
-        "https://lh3.googleusercontent.com/p/AF1QipO2QN8NH-LQUEyr0ilkgQbwYu_cIjcyisir9Sm4=s680-w680-h510",
+        "https://thietkecafedep.com.vn/upload/images/thi-cong-noi-that/coffee/he-thong-trung-nguyen/12-Alexandre-de-Rhodes-Ben-Nghe-Quan-1/noi-that-quan-cafe-trung-nguyen-legend-12-alexandre-de-rhodes-quan-1-35.jpg",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       contentImg: [
@@ -417,6 +460,13 @@ export const dataCafe: CafeProps[] = [
         "https://lh3.googleusercontent.com/p/AF1QipN2Q3NWjPAH9rRqASuxfWdqQ7jFELBRu6D2uidO=s680-w680-h510",
         "https://lh3.googleusercontent.com/p/AF1QipOc4r0nDAaQQ1T3GD6FhxAkTnUUZDmexQCy8-s-=s680-w680-h510",
       ],
+      cafeLogo:
+        "https://thietkelogo.vn/wp-content/uploads/2016/03/logo-cf-trung-nguyen.png",
+      cafeOperation: {
+        openingTime: "07:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.HOCHIMINH,
         street: "116 -117 -118 Đ. Bãi Sậy",
@@ -449,7 +499,7 @@ export const dataCafe: CafeProps[] = [
       },
     ],
     totalLike: 6953,
-    totalDislike: 2,
+    totalDislike: 200,
     totalComment: 10,
     totalShare: 5,
     isTodayMenu: false,
@@ -464,7 +514,7 @@ export const dataCafe: CafeProps[] = [
       title: "Starbucks Nguyen Hue",
       phoneNumber: "23456789",
       thumbnail:
-        "https://lh3.googleusercontent.com/p/AF1QipPM36q7ozvEowXC1fNG8FCFGKPLD9Hlba2IR78E=s680-w680-h510",
+        "https://danangfantasticity.com/wp-content/uploads/2024/10/starbucks-bach-dang-da-nang-03.jpg",
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       contentImg: [
@@ -473,6 +523,13 @@ export const dataCafe: CafeProps[] = [
         "https://lh3.googleusercontent.com/p/AF1QipMR_TsQSYcFVR1t5veKf09HxW_HzHg9vl9m2iCc=s680-w680-h510",
         "https://lh3.googleusercontent.com/p/AF1QipMWzv4uZ5jPL2KUgjXEPEgZJX-SWC1-f5OVAt9O=s680-w680-h510",
       ],
+      cafeLogo:
+        "https://cdn.freebiesupply.com/logos/large/2x/starbucks-coffee-logo-png-transparent.png",
+      cafeOperation: {
+        openingTime: "06:30",
+        closingTime: "10:00",
+        openingDay: [1, 2, 3, 4, 5, 6, 7, 8],
+      },
       cafeLocation: {
         city: LOCATION_CITY.HOCHIMINH,
         street: "99, Đường Nguyễn Huệ",
@@ -546,5 +603,13 @@ export const dataCafeCategory: CafeCategoryProps[] = [
   {
     id: "8",
     cafeCategoryName: "Cityview",
+  },
+  {
+    id: "9",
+    cafeCategoryName: "Reserve",
+  },
+  {
+    id: "10",
+    cafeCategoryName: "Decoration",
   },
 ];

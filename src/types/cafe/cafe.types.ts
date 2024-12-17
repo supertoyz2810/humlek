@@ -17,12 +17,20 @@ export type CafeLocationProps = {
   ward: string;
 }
 
+export type CafeOperation = {
+  openingTime: string;
+  closingTime: string;
+  openingDay: number[]
+}
+
 export type CafeDetailProps = {
   title: string;
   content: string;
   thumbnail: string;
   phoneNumber: string;
   contentImg: string[];
+  cafeLogo: string;
+  cafeOperation: CafeOperation;
   cafeLocation: CafeLocationProps;
   cafeCategory: CafeCategoryProps[];
   cafeTheme: CafeThemeColor;

@@ -57,7 +57,7 @@ export default function NavbarMain({
             scrollDown ? "text-2xl text-slate-200" : "text-3xl"
           } hover:cursor-pointer hover:text-slate-100 transition-all`}
         >
-          <Link href={"/cafe"}>
+          <Link href={"/cafes"}>
             <MdLocalCafe />
           </Link>
         </div>

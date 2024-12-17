@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { dataCafe } from "@/constants/Mockdata.constants";
 import { Button } from "@/components/ui/button";
-import { BiDislike, BiLike } from "react-icons/bi";
+import { BiDislike, BiLike, BiSolidLike } from "react-icons/bi";
 import { PiShareFatFill } from "react-icons/pi";
 import {
   Tooltip,
@@ -28,9 +28,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CafeProps } from "@/types/cafe/cafe.types";
-import type { AutoplayType } from "embla-carousel-autoplay";
+import { formatLikeNumber } from "@/utils/format-number.utils";
 
 type CafeDetailPageProps = {
   params: {
@@ -38,18 +45,16 @@ type CafeDetailPageProps = {
   };
 };
 
-export default function CafeDetailPage({
-  params,
-}: CafeDetailPageProps) {
+export default function CafeDetailPage({ params }: CafeDetailPageProps) {
   const { cafeId } = params;
-  const [cafeprimaryColor, setCafeprimaryColor] =
-    useState<string>();
+  const [autoplay] = useState(() =>
+    Autoplay({ delay: 2000, stopOnInteraction: false })
+  );
+  const [cafeprimaryColor, setCafeprimaryColor] = useState<string>();
   const [cafeData, setCafeData] = useState<CafeProps>();
   useEffect(() => {
     const fetchCafeById = async () => {
-      setCafeData(
-        dataCafe.find((item) => item.id === cafeId)
-      );
+      setCafeData(dataCafe.find((item) => item.id === cafeId));
     };
     fetchCafeById();
   }, [cafeData, cafeId, cafeprimaryColor]);
@@ -57,8 +62,8 @@ export default function CafeDetailPage({
   useLayoutEffect(() => {
     const fetchCafeById = async () => {
       setCafeprimaryColor(
-        dataCafe.find((item) => item.id === cafeId)
-          ?.cafeDetails.cafeTheme.primaryColor
+        dataCafe.find((item) => item.id === cafeId)?.cafeDetails.cafeTheme
+          .primaryColor
       );
     };
     fetchCafeById();
@@ -73,46 +78,46 @@ export default function CafeDetailPage({
         style={{
           boxShadow: `${cafeprimaryColor} 0px -10px 10px -8px inset`,
         }}
-        className="px-8 py-10 flex flex-col lg:flex-row relative gap-6 w-full m-auto"
+        className="px-8 py-10 flex flex-col relative gap-6 w-full m-auto"
       >
-        <div className="gap-4 flex flex-col">
-          <div className="group relative flex w-full lg:w-[400px] h-full lg:max-h-[300px] aspect-auto bg-no-repeat m-auto border-2 rounded border-slate-700 hover:cursor-pointer transition-all">
-            <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
-            <Image
-              className="rounded-sm w-full h-full object-fill"
-              alt=""
-              src={cafeData?.cafeDetails.thumbnail || ""}
-              height={800}
-              width={800}
-            />
-          </div>
-          <div className="flex flex-row gap-3">
-            <Carousel
-              plugins={[
-                Autoplay({
-                  delay: 2000,
-                  stopOnInteraction: false,
-                }) as AutoplayType,
-              ]}
-            >
-              <CarouselContent>
+        <div className="gap-4 flex">
+          <div className="flex flex-row gap-3 w-full mx-auto justify-center">
+            <Carousel plugins={[autoplay]}>
+              <CarouselContent className="w-full m-0 gap-3">
                 {cafeData?.cafeDetails.contentImg.map((imgSrc, index) => (
                   <CarouselItem
                     key={index}
-                    className="md:basis-1/2 lg:basis-1/3"
+                    className="md:basis-1/2 lg:basis-1/3 w-full mx-auto m-0 p-0"
                   >
                     <div
                       key={index}
-                      className="group relative flex items-center w-full h-[100px] border-2 rounded border-slate-700 hover:cursor-pointer transition-all"
+                      className="group relative flex items-center w-full h-[300px] rounded hover:cursor-pointer transition-all"
                     >
-                      <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
-                      <Image
-                        className="rounded-sm object-cover bg-no-repeat w-full h-full"
-                        alt=""
-                        src={imgSrc}
-                        height={600}
-                        width={600}
-                      />
+                      <Dialog>
+                        <DialogTrigger className="h-full w-full">
+                          <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
+                          <Image
+                            className="rounded-sm object-cover bg-no-repeat w-full h-full"
+                            alt=""
+                            src={imgSrc}
+                            height={600}
+                            width={600}
+                          />
+                        </DialogTrigger>
+                        <DialogContent className="bg-slate-900 border-slate-900 p-0 w-full">
+                          <DialogHeader>
+                            <DialogDescription>
+                              <Image
+                                className="rounded-sm object-cover bg-no-repeat w-full h-full"
+                                alt=""
+                                src={imgSrc}
+                                height={600}
+                                width={600}
+                              />
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </CarouselItem>
                 ))}
@@ -120,65 +125,118 @@ export default function CafeDetailPage({
             </Carousel>
           </div>
         </div>
-        <div className="flex flex-col py-3 gap-3 justify-between">
-          <div className="flex flex-col gap-3">
-            {/* Title */}
-            <div className="flex flex-row justify-between items-center">
-              <div
-                style={{ color: `${cafeprimaryColor}` }}
-                className={`text-4xl max-lg:text-2xl font-semibold flex`}
-              >
-                {cafeData?.cafeDetails.title}
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild className="hover:cursor-pointer">
-                      <p>⭐</p>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-yellow-500 font-bold text-slate-900">
-                      <p>Best choice</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+        <div className="flex flex-row gap-3 justify-between">
+          <div className="group aspect-video relative w-full lg:w-full h-[400px] lg:h-auto bg-no-repeat m-auto rounded hover:cursor-pointer transition-all">
+            <Dialog>
+              <DialogTrigger className="h-full w-full">
+                <div className="block w-full h-full bg-black absolute opacity-0 group-hover:opacity-60 transition-all"></div>
+                <Image
+                  className="rounded-sm w-full h-full object-cover"
+                  alt=""
+                  src={cafeData?.cafeDetails.thumbnail || ""}
+                  height={800}
+                  width={1600}
+                />
+              </DialogTrigger>
+              <DialogContent className="bg-slate-900 border-slate-900 p-0 w-full">
+                <DialogHeader>
+                  <DialogDescription>
+                    <Image
+                      className="rounded-sm w-full h-full object-cover aspect-video"
+                      alt=""
+                      src={cafeData?.cafeDetails.thumbnail || ""}
+                      height={800}
+                      width={800}
+                    />
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+          </div>
+          <div className="flex flex-col justify-between">
+            <div className="flex flex-col gap-3">
+              {/* Title */}
+              <div className="flex flex-row justify-between items-center">
+                <div
+                  style={{ color: `${cafeprimaryColor}` }}
+                  className={`text-4xl max-lg:text-2xl font-semibold flex w-full justify-between`}
+                >
+                  {cafeData?.cafeDetails.title}
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild className="hover:cursor-pointer">
+                        <p>⭐</p>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-yellow-500 font-bold text-slate-900">
+                        <p>Best choice</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </div>
+              {/* Content */}
+              <div className="flex flex-col justify-between gap-4">
+                <div className="text-slate-200">
+                  {cafeData?.cafeDetails.content}
+                </div>
+                <div className="text-slate-200 flex gap-1">
+                  <span>Category:</span>
+                  <span>
+                    {cafeData?.cafeDetails.cafeCategory.map((item, index) => (
+                      <>
+                        <span className="hover:cursor-pointer">
+                          {item.cafeCategoryName}
+                        </span>
+                        {index <
+                          cafeData.cafeDetails.cafeCategory.length - 1 && (
+                          <span>, </span>
+                        )}
+                      </>
+                    ))}
+                  </span>
+                </div>
               </div>
             </div>
-            {/* Content */}
-            <p className="text-slate-200">{cafeData?.cafeDetails.content}</p>
-          </div>
-          {/* User Interact */}
-          <div className="flex flex-col lg:flex-row items-start lg:gap-0 gap-4 lg:items-center justify-between">
-            <div className="flex flex-row gap-3">
-              <span className="text-2xl animate-glow transition-all">
-                <BiLike className="scale-125 text-slate-200" />
-              </span>
-              <span className="text-green-500 text-xl">75%</span>
-            </div>
-            <div className="flex flex-row justify-center items-center gap-1 lg:gap-4">
-              <Button className="group bg-slate-800 transition-all w-[60px] text-1xl flex justify-center items-center hover:bg-green-900 hover:text-green-200 active:bg-green-600">
-                <div className="group-hover:animate-bounce-zoom-icon group-active:scale-[3] group-active:animate-none transition-all">
-                  <BiLike className="scale-125" />
-                </div>
-                {cafeData?.totalLike}
-              </Button>
-              <div className="w-[1px] bg-slate-600 h-6"></div>
-              <Button className="group bg-slate-800 w-[60px] transition-all text-1xl flex justify-center items-center hover:bg-red-900 hover:text-red-200 active:bg-red-600">
-                <div className="group-hover:animate-bounce-zoom-icon group-active:scale-[3] group-active:animate-none transition-all">
-                  <BiDislike className="scale-125" />
-                </div>
-                {cafeData?.totalDislike}
-              </Button>
-              <div className="w-[1px] bg-slate-600 h-6"></div>
-              <Button
-                // onClick={() => setToggleComments((prev) => !prev)}
-                className="bg-slate-800 w-[60px] text-1xl flex justify-center items-center hover:bg-blue-900 hover:text-blue-200 active:bg-blue-600"
-              >
-                <FaComments />
-                {cafeData?.totalComment}
-              </Button>
-              <div className="w-[1px] bg-slate-600 h-6"></div>
-              <Button className="bg-slate-800 w-[60px] text-1xl flex justify-center items-center hover:bg-purple-900 hover:text-purple-200 active:bg-purple-600">
-                <PiShareFatFill />
-                {cafeData?.totalShare}
-              </Button>
+            {/* User Interact */}
+            <div className="w-full flex flex-col lg:flex-row items-start lg:gap-0 gap-4 lg:items-center justify-between lg:pt-0 pt-4">
+              <div className="flex flex-row gap-3">
+                <span className="text-2xl animate-glow transition-all">
+                  <BiSolidLike className="scale-125 text-slate-200" />
+                </span>
+                <span className="text-green-500 text-xl">
+                  {Math.floor(
+                    (cafeData.totalLike /
+                      (cafeData.totalLike + cafeData.totalDislike)) *
+                      100
+                  )}
+                  %
+                </span>
+              </div>
+              <div className="w-full lg:w-auto grid grid-cols-2 md:grid-cols-4 justify-center items-center gap-3 lg:gap-4">
+                <Button className="group bg-slate-800 transition-all w-full text-1xl flex justify-center items-center hover:bg-green-900 hover:text-green-200 active:bg-green-600">
+                  <div className="group-hover:animate-bounce-zoom-icon group-active:scale-[3] group-active:animate-none transition-all">
+                    <BiLike className="scale-125" />
+                  </div>
+                  {formatLikeNumber(cafeData?.totalLike)}
+                </Button>
+                <Button className="group bg-slate-800 w-full transition-all text-1xl flex justify-center items-center hover:bg-red-900 hover:text-red-200 active:bg-red-600">
+                  <div className="group-hover:animate-bounce-zoom-icon group-active:scale-[3] group-active:animate-none transition-all">
+                    <BiDislike className="scale-125" />
+                  </div>
+                  {formatLikeNumber(cafeData?.totalDislike)}
+                </Button>
+                <Button
+                  // onClick={() => setToggleComments((prev) => !prev)}
+                  className="bg-slate-800 w-full text-1xl flex justify-center items-center hover:bg-blue-900 hover:text-blue-200 active:bg-blue-600"
+                >
+                  <FaComments />
+                  {formatLikeNumber(cafeData?.totalComment)}
+                </Button>
+                <Button className="bg-slate-800 w-full text-1xl flex justify-center items-center hover:bg-purple-900 hover:text-purple-200 active:bg-purple-600">
+                  <PiShareFatFill />
+                  {formatLikeNumber(cafeData?.totalShare)}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
